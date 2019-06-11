@@ -13,6 +13,14 @@ router.post('/v1/:id/classic/latest', (ctx, nest) => {
 
   const { body } = ctx.request;
   ctx.body = { keg: ctx.path };
+
+  if (true) {
+    const error = new Error('这是一段文字');
+    error.errorCode = 10001;
+    error.requestUrl = `${ctx.method} ${ctx.path}`;
+    error.status = 400;
+    throw error;
+  }
 });
 
 module.exports = router;
