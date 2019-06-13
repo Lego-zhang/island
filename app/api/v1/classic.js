@@ -1,4 +1,6 @@
 const Router = require('koa-router');
+const { HttpException, ParameterException } = require('../../../core/http-exception');
+const { PositiveIntegerValidator } = require('../../validators/validator');
 
 const router = new Router();
 
@@ -9,18 +11,16 @@ router.post('/v1/:id/classic/latest', (ctx, nest) => {
   // 获取URL问号后面的参数
   const { query } = ctx.request;
   // 获取header中的参数
-  const headers = ctx.request.header;
+  const { header } = ctx.request;
 
   const { body } = ctx.request;
-  ctx.body = { keg: ctx.path };
 
-  if (true) {
-    const error = new Error('这是一段文字');
-    error.errorCode = 10001;
-    error.requestUrl = `${ctx.method} ${ctx.path}`;
-    error.status = 400;
-    throw error;
-  }
+  const v = new PositiveIntegerValidator().validate(ctx);
+
+  const id = v.get('path.id');
+
+
+  ctx.body = { keg: id };
 });
 
 module.exports = router;

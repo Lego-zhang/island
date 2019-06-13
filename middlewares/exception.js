@@ -1,14 +1,26 @@
+const { HttpException } = require('../core/http-exception');
+
 const catchError = async (ctx, next) => {
   try {
     await next();
   } catch (error) {
-    if (error.errorCode) {
+    if (global.config.environment === 'dev') {
+      throw error;
+    }
+    if (error instanceof HttpException) {
       ctx.body = {
-        msg: error.message,
+        msg: error.msg,
         error_code: error.errorCode,
-        request: error.requestUrl,
+        request: `${ctx.method} ${ctx.path}`,
       };
-      ctx.status = error.status;
+      ctx.status = error.code;
+    } else {
+      ctx.body = {
+        msg: '未知异常',
+        error_code: 99999,
+        request: `${ctx.method} ${ctx.path}`,
+      };
+      ctx.status = 500;
     }
   }
 };
