@@ -6,10 +6,10 @@ module.exports = {
    * */
   environment: 'dev',
   database: {
-    dbName: 'island',
+    dbname: 'island',
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'ohdou',
+    password: '123456',
   },
 };

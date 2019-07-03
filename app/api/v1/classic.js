@@ -5,7 +5,7 @@ const { PositiveIntegerValidator } = require('../../validators/validator');
 const router = new Router();
 
 
-router.post('/v1/:id/classic/latest', (ctx, nest) => {
+router.post('/v1/:id/classic/latest', async (ctx, nest) => {
   // 获取URL中的参数
   const path = ctx.params;
   // 获取URL问号后面的参数
@@ -15,7 +15,7 @@ router.post('/v1/:id/classic/latest', (ctx, nest) => {
 
   const { body } = ctx.request;
 
-  const v = new PositiveIntegerValidator().validate(ctx);
+  const v = await new PositiveIntegerValidator().validate(ctx);
 
   const id = v.get('path.id');
 
