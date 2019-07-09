@@ -1,4 +1,6 @@
 const { LinValidator, Rule } = require('../../core/lin-validator-v2');
+const { User } = require('../models/user');
+const { LoginType } = require('../lib/enum');
 
 class PositiveIntegerValidator extends LinValidator {
   constructor() {
@@ -8,8 +10,6 @@ class PositiveIntegerValidator extends LinValidator {
     ];
   }
 }
-
-const { User } = require('../models/user');
 
 class RegisterValidator extends LinValidator {
   constructor() {
@@ -51,4 +51,47 @@ class RegisterValidator extends LinValidator {
   }
 }
 
-module.exports = { PositiveIntegerValidator, RegisterValidator };
+class TokenValidator extends LinValidator {
+  constructor() {
+    super();
+    // 账号
+    this.account = [
+      new Rule('isLength', '不符合账号规则', {
+        min: 4,
+        max: 32,
+      }),
+    ];
+    // 密码
+    this.secret = [
+      // 是必须要传的么
+      // web 账号+密码
+      // 登录 多元化 小程序 密码
+      // 当用户打开微信的时候已经将密码验证李， 已经是合法用户了
+      // 如果是小程序的话直接用account就行了
+
+      /*
+        1.可以为空 可以不传
+        2.
+       */
+      new Rule('isOptional'),
+      new Rule('isLength', '至少6个字符', {
+        min: 6,
+        max: 128,
+      }),
+    ];
+  }
+
+  // type 用TYPE区分不同的用户登录方式
+  // js模拟枚举
+  validateLoginType(vals) {
+    if (!vals.body.type) {
+      throw new Error('type是必须参数');
+    }
+    if (!LoginType.isThisType(vals.body.type)) {
+      throw new Error('type是参数不合法');
+    }
+  }
+}
+
+
+module.exports = { PositiveIntegerValidator, RegisterValidator, TokenValidator };

@@ -37,6 +37,10 @@ nodemon app.js
 
 mysql2
 
+#### 生成jwt令牌
+
+jsonwebtoken
+
 ### 关于模板引擎
 
 ```js
@@ -51,6 +55,7 @@ module.exports = {
 ```
 bcryptjs 
 ### 加密
+
 
 
 ### 关于 node
@@ -189,6 +194,10 @@ process.cwd()
    - 高并发时容易重复
    - 最好不要使用 字符串 随机字符串 GUID 数据量大时查询速度非常慢
    - 接口保护 权限 访问接口 Token 令牌
+
+## 用户登录
+1. 令牌
+  - 过期时间 
 
 ## 数据库
 
