@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken');
 const { Forbbiden } = require('../core/http-exception');
 
 class Auth {
+  constructor(level) {
+    this.level = level || 1;
+    Auth.USER = 8;
+    Auth.ADMIN = 16;
+  }
+
   get m() {
     return async (ctx, next) => {
       const userToken = basicAuth(ctx.req);
@@ -20,6 +26,11 @@ class Auth {
           throw new Forbbiden('token已过期');
           errorMsg = 'token已过期';
         }
+      }
+
+      if (decode.scope < this.level) {
+        const errMsg = '权限不足';
+        throw new Forbbiden(errMsg);
       }
 
       ctx.auth = {

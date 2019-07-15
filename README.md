@@ -196,8 +196,15 @@ process.cwd()
    - 接口保护 权限 访问接口 Token 令牌
 
 ## 用户登录
-1. 令牌
-  - 过期时间 
+### 令牌
+- 过期时间 
+
+### 权限
+- 限制 token 角色
+#### 分级
+- scope
+
+
 
 ## 数据库
 
@@ -244,6 +251,12 @@ process.cwd()
    - 动脑筋
    - 思考
    - 能不能简化
+
+### 业务逻辑
+- 将业务逻辑写在Model中
+### 业务分层
+- 可以在 Model层上建立Services
+- thinkphp 分为 Model Services logic
 
 ## 其他
 

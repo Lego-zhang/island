@@ -28,6 +28,23 @@ class User extends Model {
     }
     return user;
   }
+
+  // 查询openId
+  static async getUserByOpenid(openid) {
+    const user = await User.findOne({
+      where: {
+        openid,
+      },
+    });
+    return user;
+  }
+
+  // 新增用户方法
+  static async registerByOpenid(openid) {
+    return await User.create({
+      openid,
+    });
+  }
 }
 User.init({
   id: {
