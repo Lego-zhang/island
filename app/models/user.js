@@ -68,7 +68,7 @@ User.init({
       this.setDataValue('password', psw);
     },
   },
-  opendi: {
+  openid: {
     type: Sequelize.STRING(64),
     unique: true,
   },

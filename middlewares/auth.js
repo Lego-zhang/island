@@ -47,6 +47,16 @@ class Auth {
       await next();
     };
   }
+
+  // 验证Token令牌
+  static verifyToken(token) {
+    try {
+      jwt.verify(token, global.config.security.secretKey);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 module.exports = {
   Auth,

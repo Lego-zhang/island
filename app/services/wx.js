@@ -20,8 +20,9 @@ class WXManager {
       throw new AuthFailed('openid获取失败');
     }
     const { errcode } = result.data;
-    if (errcode !== 0) {
-      throw new AuthFailed(`openid获取失败:${errcode}`);
+    const { errmsg } = result.data;
+    if (errcode) {
+      throw new AuthFailed(`openid获取失败:${errmsg}`);
     }
 
     // openid 建立档案 写入user 表中 生成uid
