@@ -7,7 +7,7 @@ const classicFields = {
   pubdate: Sequelize.DATEONLY,
   fav_nums: Sequelize.INTEGER,
   title: Sequelize.STRING,
-  tyep: Sequelize.TINYINT,
+  type: Sequelize.TINYINT,
 };
 
 class Movie extends Model {
