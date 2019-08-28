@@ -32,7 +32,7 @@ router.post('/', async (ctx) => {
   };
 });
 
-// 验证Token连接
+// 验证Token连接1233
 router.post('/verify', async (ctx) => {
   const v = await new NotEmptyValidator().validate(ctx);
   const result = Auth.verifyToken(v.get('body.token'));
